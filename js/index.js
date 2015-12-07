@@ -1,11 +1,17 @@
 
 console.log('start');
 
-var arr = [[2,2,2,2],
-           [4,4,2,0],
-           [2,8,2,16],
-           [0,2,0,2]];
+//var arr = [[2,2,2,2],
+//           [4,4,2,0],
+//           [2,8,2,16],
+//           [0,2,0,2]];
+//
+var arr = [[0,0,0,2],
+           [0,0,0,0],
+           [0,0,0,0],
+           [0,2,0,0]];
 
+var changeFlag = false;
 
 var table = document.getElementById('playground');
 
@@ -24,15 +30,9 @@ for(var row=0; row<tableRow.length;  row++){
 
 }
 
-
-
-
-
-console.log('arr before',arr);
-
+//console.log('arr before',arr);
 
 function moveLeft(){
-    
     var dimen = arr.length;
     var start = 0;
     var end = dimen-1;
@@ -40,18 +40,24 @@ function moveLeft(){
     for(var i=0; i<dimen; i++){
         var arrRow = arr[i];
             
-        console.log('move left: ', arrRow);
+//        console.log('move left: ', arrRow);
         arrRow = move(arrRow,start,end);
-        console.log('arr after arrange: ',arrRow);
-        console.log('\n');
+//        console.log('arr after arrange: ',arrRow);
+//        console.log('\n');
     }
+    
+    console.log('change flag: ', changeFlag);
+    if(changeFlag==true){
+        generateNewNum();    
+        changeFlag=false;
+    }
+    
     
     updateTable();
 }
 
 
 function moveRight(){
-    
     var dimen = arr.length;
     var start = dimen-1;
     var end = 0;
@@ -59,12 +65,20 @@ function moveRight(){
     for(var i=0; i<dimen; i++){
         var arrRow = arr[i];
             
-        console.log('move left: ', arrRow);
+//        console.log('move left: ', arrRow);
         arrRow = move(arrRow,start,end);
-        console.log('arr after arrange: ',arrRow);
-        console.log('\n');
+//        console.log('arr after arrange: ',arrRow);
+//        console.log('\n');
     }
+    
+    console.log('change flag:', changeFlag);
+    if(changeFlag==true){
+        generateNewNum();    
+        changeFlag=false;
+    }    
+    
     updateTable();
+    
 }
 
 
@@ -78,16 +92,23 @@ function moveUp(){
         for(var row=0; row<dimen; row++){
             arrRow.push(arr[row][col]);
         }
-        console.log('move left: ', arrRow);
+//        console.log('move left: ', arrRow);
         arrRow = move(arrRow,start,end);
         
         for(var row=0; row<dimen;row++){
             arr[row][col]=arrRow[row];
         }
         
-        console.log('arr after arrange: ',arrRow);
-        console.log('\n');
+//        console.log('arr after arrange: ',arrRow);
+//        console.log('\n');
     }
+    
+    console.log('change flag:', changeFlag);
+    if(changeFlag==true){
+        generateNewNum();    
+        changeFlag=false;
+    }   
+    
     updateTable();
 }
 
@@ -101,16 +122,23 @@ function moveDown(){
         for(var row=0; row<dimen; row++){
             arrRow.push(arr[row][col]);
         }
-        console.log('move left: ', arrRow);
+//        console.log('move left: ', arrRow);
         arrRow = move(arrRow,start,end);
         
         for(var row=0; row<dimen;row++){
             arr[row][col]=arrRow[row];
         }
         
-        console.log('arr after arrange: ',arrRow);
-        console.log('\n');
+//        console.log('arr after arrange: ',arrRow);
+//        console.log('\n');
     }
+    
+    console.log('change flag:', changeFlag);
+    if(changeFlag==true){
+        generateNewNum();    
+        changeFlag=false;
+    }    
+    
     updateTable();
 }
 
@@ -135,6 +163,7 @@ function move(arrSingle, start, end){
                         arrRow[lastNumIndex]+=arrRow[a];
                         arrRow[a]=0;
                         lastNum = -1;
+                        changeFlag=true;
                     }else{
                         lastNum=arrRow[a];
                         lastNumIndex=a;    
@@ -146,7 +175,7 @@ function move(arrSingle, start, end){
             }
         }
 
-        console.log('from move after scan: ',arrRow);
+//        console.log('from move after scan: ',arrRow);
 
 
         for(var a=start; a<=end; a++){
@@ -156,6 +185,7 @@ function move(arrSingle, start, end){
                         if(arrRow[b]!=0){
                             arrRow[a] = arrRow[b];
                             arrRow[b]=0;
+                            changeFlag=true;
                             break;
                         }
                     }
@@ -163,9 +193,9 @@ function move(arrSingle, start, end){
             }
         }
 
-        console.log('from move after arrange: ',arrRow);  
+//        console.log('from move after arrange: ',arrRow);  
     }else{
-        console.log('condition 1');
+//        console.log('condition 1');
         var lastNum=-1;
         var lastNumIndex;
 
@@ -178,6 +208,7 @@ function move(arrSingle, start, end){
                         arrRow[lastNumIndex]+=arrRow[a];
                         arrRow[a]=0;
                         lastNum = -1;
+                        changeFlag=true;
                     }else{
                         lastNum=arrRow[a];
                         lastNumIndex=a;    
@@ -189,7 +220,7 @@ function move(arrSingle, start, end){
             }
         }
 
-        console.log('from move after scan: ',arrRow);
+//        console.log('from move after scan: ',arrRow);
 
 
         for(var a=start; a>=end; a--){
@@ -199,6 +230,7 @@ function move(arrSingle, start, end){
                         if(arrRow[b]!=0){
                             arrRow[a] = arrRow[b];
                             arrRow[b]=0;
+                            changeFlag=true;
                             break;
                         }
                     }
@@ -206,7 +238,7 @@ function move(arrSingle, start, end){
             }
         }
 
-        console.log('from move after arrange: ',arrRow);  
+//        console.log('from move after arrange: ',arrRow);  
     }
     
           
@@ -215,8 +247,8 @@ function move(arrSingle, start, end){
 
 
 function updateTable(){
-    for(var row in tableRow){
-        console.log(tableRow[row]);
+    for(var row=0; row<tableRow.length; row++){
+//        console.log(tableRow[row]);
         var td = tableRow[row].getElementsByTagName('td');
             for(var i in td){
                 if(arr[row][i]!=0){
@@ -234,9 +266,9 @@ function updateTable(){
 
 function generateNewNum(){
     var emptyIndices = [];
-    console.log('hello');
+//    console.log('hello');
 //    arr.length;
-    console.log('hello: ',arr.length)
+//    console.log('hello: ',arr.length)
     for(var i=0; i<arr.length; i++){
         for(var j=0; j<arr.length; j++){
             if(arr[i][j]==0){
@@ -246,10 +278,41 @@ function generateNewNum(){
         }
     }
     
-    console.log('empty',emptyIndices);
+//    console.log('empty',emptyIndices);
+    var max = emptyIndices.length -1;
+    var min = 0;
+    var selectIndex = Math.floor(Math.random()*(max-min+1)+min);
+    
+    
+    var randValue = Math.floor(Math.random()*2);
+    var nextNum=2;
+    if(randValue==0) nextNum=2;
+    else if(randValue==1) nextNum=4;
+    
+    var indexValue = emptyIndices[selectIndex];
+    var row = Math.floor(indexValue/arr.length);
+    var col = indexValue % arr.length;
+    
+//    console.log(row,',',col,' num:',nextNum);
+    arr[row][col] = nextNum;
 }
+//
+//function compareArray(arr1, arr2){
+//    console.log(arr1);
+//    console.log(arr2);
+//    for(var row=0; row<arr1.length; row++){
+//        for(var col=0; col<arr1.length; col++){
+//            if(arr1[row][col]!=arr2[row][col]){
+//                console.log('false');
+//                return false;
+//            }
+//        }
+//    }
+//    console.log('true');
+//    return true;
+//}
 
-generateNewNum();
+
 
 
 
