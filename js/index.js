@@ -1,4 +1,3 @@
-
 console.log('start');
 
 //var arr = [[2,2,2,2],
@@ -14,6 +13,29 @@ var arr = [[0,0,0,2],
 var changeFlag = false;
 
 var table = document.getElementById('playground');
+
+
+var body = document.getElementsByTagName('body')[0];
+
+body.onkeydown = function(event){
+    console.log(event.keyCode);
+    var key = event.keyCode;
+    
+    if(key==37){
+        moveLeft();
+    }else if(key==38){
+        moveUp();
+    }else if(key==39){
+        moveRight();
+    }else if(key==40){
+        moveDown();
+    }
+}
+
+//table.addEventListener('keydown',function(){
+//    console.log('hello');
+//});
+
 
 var tableRow = table.getElementsByTagName('tr');
 console.log(tableRow);
@@ -111,6 +133,7 @@ function moveUp(){
     
     updateTable();
 }
+
 
 function moveDown(){
     var dimen = arr.length;
@@ -262,8 +285,6 @@ function updateTable(){
 }
 
 
-
-
 function generateNewNum(){
     var emptyIndices = [];
 //    console.log('hello');
@@ -296,25 +317,6 @@ function generateNewNum(){
 //    console.log(row,',',col,' num:',nextNum);
     arr[row][col] = nextNum;
 }
-//
-//function compareArray(arr1, arr2){
-//    console.log(arr1);
-//    console.log(arr2);
-//    for(var row=0; row<arr1.length; row++){
-//        for(var col=0; col<arr1.length; col++){
-//            if(arr1[row][col]!=arr2[row][col]){
-//                console.log('false');
-//                return false;
-//            }
-//        }
-//    }
-//    console.log('true');
-//    return true;
-//}
-
-
-
-
 
 
 
