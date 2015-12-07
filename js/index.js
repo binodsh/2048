@@ -59,15 +59,18 @@ function moveLeft(){
             }
         }
         
+        console.log('arr after scan and merge: ',arrRow);
+        
+        
         var firstZeroIndex=-1;
-        for(var a in arr){
-            if(arr[a]==0){
-                for(var b in arr){
+        for(var a in arrRow){
+            if(arrRow[a]==0){
+                for(var b in arrRow){
                     if(b>a){
-                        if(arr[b]!=0){
+                        if(arrRow[b]!=0){
     //                        console.log('arr b: ',arr[b],' b:',b,' a:',a);
-                            arr[a] = arr[b];
-                            arr[b]=0;
+                            arrRow[a] = arrRow[b];
+                            arrRow[b]=0;
                             break;
                         }
                     }
@@ -75,7 +78,7 @@ function moveLeft(){
             }
         }
         
-        console.log('arr after scan and merge: ',arrRow);
+    console.log('arr after arrange: ',arrRow);        
     }
     
    
@@ -86,7 +89,7 @@ function moveLeft(){
 //        td1[i].innerHTML = arr[i];
 //    }
 //
-//    console.log('arr after arrange: ',arr);
+
 }
 
 
