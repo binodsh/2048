@@ -129,7 +129,6 @@ function move(arrSingle, start, end){
     var arrRow = arrSingle;
     var start = start;
     var end = end;
-    var inc;
     
     if(start<end){
         var lastNum=-1;
