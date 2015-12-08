@@ -1,12 +1,46 @@
-var arr = [[0,0,0,2],
-           [0,0,0,0],
-           [0,0,0,0],
-           [0,2,0,0]];
-
-var changeFlag = false;
-
-var table = document.getElementById('playground');
 var body = document.getElementsByTagName('body')[0];
+var container = document.getElementsByClassName('container')[0];
+var table;
+var changeFlag=false;
+
+var select = document.getElementById('dimenSelector');
+var dimen=4;
+
+function valueChange(){
+    console.log('hello');
+    dimen = parseInt(select.options[select.selectedIndex].value);
+    console.log(dimen);
+    init();
+}
+
+
+var arr;
+
+//start
+init();
+
+function init(){
+    arr= getArray(dimen);
+
+    for(var i=0; i<dimen/2; i++){
+        generateNewNum();    
+    }
+    
+    // generateNewNum();
+
+    var tempTable = container.getElementsByTagName('table')[0];
+
+    if(tempTable){
+        tempTable.remove();
+    }
+
+    table = createTable(dimen);
+    container.appendChild(table);
+    updateTable(table);
+
+    changeFlag = false;
+}
+
 
 body.onkeydown = function(event){
     var key = event.keyCode;
@@ -21,23 +55,6 @@ body.onkeydown = function(event){
         moveDown();
     }
 }
-
-
-var tableRow = table.getElementsByTagName('tr');
-
-for(var row=0; row<tableRow.length;  row++){
-//    console.log('a:',row);
-    var td = tableRow[row].getElementsByTagName('td');
-        for(var i in td){
-            if(arr[row][i]!=0){
-                td[i].innerHTML = arr[row][i];    
-            }else{
-                td[i].innerHTML = "";    
-            }
-        }   
-
-}
-
 
 function moveLeft(){
     var dimen = arr.length;
@@ -214,6 +231,7 @@ function move(arrSingle, start, end){
 
 
 function updateTable(){
+    var tableRow = table.children;
     for(var row=0; row<tableRow.length; row++){
         var td = tableRow[row].getElementsByTagName('td');
             for(var i in td){
@@ -254,5 +272,34 @@ function generateNewNum(){
     arr[row][col] = nextNum;
 }
 
+
+function getArray(dimension){
+    var tempArr = [], row=[];
+    var rowNum = dimension;
+    var colNum = dimension;
+
+    while(colNum--) row.push(0);
+    while(rowNum--) tempArr.push(row.slice());
+
+    return tempArr;
+}
+
+
+function createTable(dimension){
+    var tempTable = document.createElement('table');
+
+    for(var row=0; row<dimension; row++){
+        var tempTr = document.createElement('tr');
+        for(var col=0; col<dimension; col++){
+            var tempTd = document.createElement('td');
+
+            tempTr.appendChild(tempTd);
+        }
+
+        tempTable.appendChild(tempTr);
+    }
+
+    return tempTable;
+}
 
 

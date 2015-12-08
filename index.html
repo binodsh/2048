@@ -9,22 +9,11 @@
     <body tabindex="1">
         
         <div class="container">
-            <table id="playground">
-                <tr>
-                    <td></td> <td></td> <td></td> <td></td>
-                </tr>
-                <tr>
-                    <td></td> <td></td> <td></td> <td></td>
-                </tr>
-                <tr>
-                    <td></td> <td></td> <td></td> <td></td>
-                </tr>
-                <tr>
-                    <td></td> <td></td> <td></td> <td></td>
-                </tr>
-            </table>
-            
-            
+            <select id="dimenSelector" onchange="valueChange()">
+                <option value="4">4 x 4</option>
+                <option value="8">8 x 8</option>
+                <option value="16">16 x 16</option>
+            </select>
         </div>
     
         <script src="js/index.js"></script>
