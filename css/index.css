@@ -20,3 +20,51 @@ table tr td{
     text-align: center;
     
 }
+
+td.tile-0{
+    background-color: #EEE;
+}
+
+td.tile-2{
+    background-color: #bbf493;
+}
+
+td.tile-4{
+    background-color: #cff57a;
+}
+
+td.tile-8{
+    background-color: #e0f56b;
+}
+
+td.tile-16{
+    background-color: #f6f55c;
+}
+
+td.tile-32{
+    background-color: #f6db4e;
+}
+
+td.tile-64{
+    background-color: #f7bb3e;
+}
+
+td.tile-128{
+    background-color: #f79a30;
+}
+
+td.tile-256{
+    background-color: #f87723;
+}
+
+td.tile-512{
+    background-color: #f95318;
+}
+
+td.tile-1024{
+    background-color: #f82c0b;
+}
+
+td.tile-2048{
+    background-color: #ED8A8A;
+}
