@@ -234,12 +234,13 @@ function updateTable(){
     var tableRow = table.children;
     for(var row=0; row<tableRow.length; row++){
         var td = tableRow[row].getElementsByTagName('td');
-            for(var i in td){
+            for(var i=0; i < td.length; i++){
                 if(arr[row][i]!=0){
                     td[i].innerHTML = arr[row][i];    
                 }else{
                     td[i].innerHTML = "";    
                 }
+                assignClassForTile(td[i]);
             }
     }
 }
@@ -302,4 +303,12 @@ function createTable(dimension){
     return tempTable;
 }
 
-
+function assignClassForTile(tdElement){
+    var value = tdElement.innerHTML;
+    tdElement.removeAttribute('class');
+    if (value === undefined || value === '') {
+        tdElement.setAttribute('class', 'tile-0');
+    } else{
+        tdElement.setAttribute('class', 'tile-'+value);
+    }
+}
