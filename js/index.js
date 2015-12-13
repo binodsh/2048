@@ -243,20 +243,12 @@ function updateTable(){
                 assignClassForTile(td[i]);
             }
     }
+    isGameOver();
 }
 
 
 function generateNewNum(){
-    var emptyIndices = [];
-    for(var i=0; i<arr.length; i++){
-        for(var j=0; j<arr.length; j++){
-            if(arr[i][j]==0){
-                var temp = arr.length*i+j;
-                emptyIndices.push(temp);
-            }
-        }
-    }
-    
+    var emptyIndices = getEmptyIndices();
     var max = emptyIndices.length -1;
     var min = 0;
     var selectIndex = Math.floor(Math.random()*(max-min+1)+min);
@@ -271,6 +263,19 @@ function generateNewNum(){
     var col = indexValue % arr.length;
     
     arr[row][col] = nextNum;
+}
+
+function getEmptyIndices(){
+    var emptyIndices = [];
+    for(var i=0; i<arr.length; i++){
+        for(var j=0; j<arr.length; j++){
+            if(arr[i][j]==0){
+                var temp = arr.length*i+j;
+                emptyIndices.push(temp);
+            }
+        }
+    }
+    return emptyIndices;
 }
 
 
@@ -311,4 +316,39 @@ function assignClassForTile(tdElement){
     } else{
         tdElement.setAttribute('class', 'tile-'+value);
     }
+}
+
+function isGameOver(){
+    var emptyIndices = getEmptyIndices();
+    if (emptyIndices.length === 0) {
+        if (!hasSameConsecutiveNumber()) {
+            alert("The game is over.");
+        }
+    }
+}
+
+function hasSameConsecutiveNumber(boardArray){
+    return hasSameConsecutiveNumberInRow(arr) || hasSameConsecutiveNumberInColumn(arr);
+}
+
+function hasSameConsecutiveNumberInRow(boardArray){
+    for (var i = 0; i < boardArray.length; i++) {
+        for (var j = 0; j < boardArray.length-1; j++) {
+            if(boardArray[i][j] === boardArray[i][j+1]){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function hasSameConsecutiveNumberInColumn(boardArray){
+    for (var i = 0; i < boardArray.length-1; i++) {
+        for (var j = 0; j < boardArray.length; j++) {
+            if(boardArray[i][j] === boardArray[i+1][j]){
+                return true;
+            }
+        }
+    }
+    return false;
 }
